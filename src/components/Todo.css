@@ -1,0 +1,76 @@
+body{
+    height: 100%;
+    width: 100%;
+}
+
+.Todo-container{
+    width: 30vw;
+    height: fit-content;
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-block: 10px;
+}
+
+form .todo-inp{
+    padding: 10px;
+    font-size: 20px;
+}
+li{
+    height: 100%;
+    width: 100%;
+    list-style-type: none;
+    border: 1px solid black;
+    background-color: aliceblue;
+    color:  black;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+   
+}
+h3{
+    font-size: 28px;
+    font-weight: 400;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-inline: 15px;
+    text-transform: capitalize;
+    user-select: none;
+}
+.icons{
+    font-size: 30px;
+    /* width: 50%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border: 1px solid snow;
+}
+
+.check{
+    color: green;
+    cursor: pointer;
+}
+.delete{
+    color: rgb(221, 100, 100);
+    cursor: pointer;
+}
+
+.clear{
+    background-color: rgb(215, 118, 39);
+}
