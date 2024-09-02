@@ -1,47 +1,53 @@
-import {useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { FaCheckCircle } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 
 
-export const Todoform = ({onAddTodo}) => {
+const storedItem = localStorage.getItem('data');
+const yourArray = JSON.parse(storedItem);
+console.log(yourArray)
+export const Todoform = ({ onAddTodo }) => {
+
+
     let [inputval, setInputval] = useState("")
 
     function handleinputChange(e) {
         setInputval(e)
     }
 
-    
 
 
-    let [arr, setArr] = useState([]);
+
+    let [arr, setArr] = useState(yourArray);
+
     function handleStoreData() {
         if (inputval === "") return;
         if (arr.includes(inputval)) return;
-
         setArr((prev) => [...prev, inputval])
         setInputval("")
     }
 
 
-    
+
     // <!-- ==================== -->
     //   Time & Date    
-    
-    let [time, setTime] = useState();
-    useEffect(() => {
-        let interval = setInterval(() => {
-            setTime(new Date().toLocaleTimeString())
-        }, 1000);
 
-        return () => clearInterval(interval)
-    }, [])
+    // let [time, setTime] = useState();
+    // useEffect(() => {
+    //     let interval = setInterval(() => {
+    //         setTime(new Date().toLocaleTimeString())
+    //     }, 1000);
 
-    function handleSubmit(e){
+    //     return () => clearInterval(interval)
+    // }, [])
+
+    function handleSubmit(e) {
+        localStorage.setItem("data", JSON.stringify(arr))
         onAddTodo(e);
     }
     function handleChek(e) {
-       e.style.textDecoration = "line-through"        
+        e.style.textDecoration = "line-through"
     }
     function handleDelete(curElem) {
         let result = arr.indexOf(curElem);
@@ -50,16 +56,19 @@ export const Todoform = ({onAddTodo}) => {
             return curelem !== "";
         })
         setArr(filtered)
+        localStorage.setItem("data", JSON.stringify(arr))
     }
 
-    function handleClear(){
+    function handleClear() {
+        arr.splice(0, arr.length);        
         setArr([])
+        localStorage.setItem("data", JSON.stringify(arr))
     }
 
     return (
         <section className="form">
 
-            <form onSubmit={(e)=>handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <input type="text" className="todo-inp" autoComplete="off" value={inputval} onChange={(e) => handleinputChange(e.target.value)} />
                 </div>
@@ -77,7 +86,7 @@ export const Todoform = ({onAddTodo}) => {
                             <h3>{cur}
 
                                 <span className="icons">
-                                    <FaCheckCircle className="check" onClick={(e) => handleChek(e.target.parentNode.parentNode.parentNode)}  />
+                                    <FaCheckCircle className="check" onClick={(e) => handleChek(e.target.parentNode.parentNode.parentNode)} />
 
 
 
